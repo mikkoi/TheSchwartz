@@ -922,6 +922,21 @@ TheSchwartz - reliable job queue
     # MyApp.pm
     package MyApp;
 
+    my $DATABASE_INFO = [
+        {
+            dsn    => 'dbi:Pg:dbname;host;port',
+            user   => 'username',
+            pass   => 'userpassword',
+            prefix => 'myschema.',
+        },
+        {
+            dsn    => 'DBI:mysql:database;host;port',
+            user   => 'username',
+            pass   => 'userpassword',
+            prefix => 'ErfDkkQ_',
+        },
+    ]
+
     sub work_asynchronously {
         my %args = @_;
 
@@ -1003,6 +1018,22 @@ The user name to use when connecting to this database.
 =item * C<pass>
 
 The password to use when connecting to this database.
+
+=item * C<prefix>
+
+A string which is prepended to every table name.
+This can be used to put the tables into a different
+schema or to attach an arbitrary string into table name
+if there is only one schema available, the default one,
+and you need to have several instances of TheSchwartz
+in the same schema.
+
+E.g.
+
+    # Schema name (note the ending dot!):
+    prefix => 'myschema.'
+    # Arbitrary string:
+    prefix => 'ErfDkkQ_'
 
 =back
 
